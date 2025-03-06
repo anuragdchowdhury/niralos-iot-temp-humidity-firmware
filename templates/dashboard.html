@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>IoT Dashboard</title>
+      <style>
+         * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: Arial, sans-serif;
+         }
+         body {
+         display: flex;
+         height: 100vh;
+         background-color: #f4f4f4;
+         }
+         /* Sidebar */
+         .sidebar {
+         width: 250px;
+         background: #007bff;
+         color: white;
+         padding: 20px;
+         display: flex;
+         flex-direction: column;
+         }
+         .sidebar img {
+         width: 180px;
+         margin-bottom: 20px;
+         }
+         .menu {
+         list-style: none;
+         padding: 0;
+         }
+         .menu li {
+         margin: 15px 0;
+         }
+         .menu a {
+         text-decoration: none;
+         color: white;
+         font-size: 16px;
+         display: block;
+         padding: 10px;
+         border-radius: 5px;
+         transition: 0.3s;
+         }
+         .menu a:hover {
+         background: #0056b3;
+         }
+         /* Main Content */
+         .main-content {
+         flex: 1;
+         padding: 30px;
+         }
+         h2 {
+         margin-bottom: 20px;
+         color: #333;
+         }
+         .container {
+         background: white;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+         max-width: 600px;
+         }
+         .info {
+         font-size: 16px;
+         font-weight: bold;
+         color: #555;
+         margin-bottom: 10px;
+         }
+         .info span {
+         color: #007bff;
+         font-weight: normal;
+         }
+         .form-group {
+         margin-bottom: 15px;
+         }
+         label {
+         display: block;
+         font-weight: bold;
+         margin-bottom: 5px;
+         }
+         input {
+         width: 100%;
+         padding: 8px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         font-size: 14px;
+         }
+         button {
+         width: 100%;
+         background-color: #007bff;
+         color: white;
+         border: none;
+         padding: 10px;
+         font-size: 16px;
+         border-radius: 5px;
+         cursor: pointer;
+         margin-top: 10px;
+         }
+         button:hover {
+         background-color: #0056b3;
+         }
+         .hidden {
+         display: none;
+         }
+      </style>
+      <script>
+         function showPage(page) {
+             document.getElementById('dashboard').classList.add('hidden');
+             document.getElementById('sensor-settings').classList.add('hidden');
+             document.getElementById('network-settings').classList.add('hidden');
+             document.getElementById('system-info').classList.add('hidden');
+         
+             document.getElementById(page).classList.remove('hidden');
+         }
+      </script>
+   </head>
+   <body>
+      <!-- Sidebar -->
+      <div class="sidebar">
+         <img src="https://niralnetworks.com/wp-content/uploads/2021/12/niral_registered_logo_opt.png" alt="Company Logo">
+         <ul class="menu">
+            <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showPage('sensor-settings')">Sensor Settings</a></li>
+            <li><a href="#" onclick="showPage('network-settings')">Network Settings</a></li>
+            <li><a href="#" onclick="showPage('system-info')">System Info</a></li>
+         </ul>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+         <!-- Dashboard -->
+         <div id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="container">
+               <div class="info">Sensor Type: <span>Temperature</span></div>
+               <div class="info">Current Status: <span>Active</span></div>
+               <div class="info">Current Value: <span>25°C</span></div>
+            </div>
+         </div>
+         <!-- Sensor Settings -->
+         <div id="sensor-settings" class="hidden">
+            <h2>Sensor Settings</h2>
+            <div class="container">
+               <form action="/save-settings/" method="post">
+                  <div class="form-group">
+                     <label for="sensor_polling">Sensor Polling Rate (sec):</label>
+                     <input type="number" id="sensor_polling" name="sensor_polling" min="1" value="5">
+                  </div>
+                  <button type="submit">Save</button>
+               </form>
+            </div>
+         </div>
+         <!-- Network Settings -->
+         <div id="network-settings" class="hidden">
+            <h2>Network Settings</h2>
+            <div class="container">
+               <form action="/save-settings/" method="post">
+                  <div class="form-group">
+                     <label for="gateway_polling">IoT Gateway Polling Rate (sec):</label>
+                     <input type="number" id="gateway_polling" name="gateway_polling" min="1" value="10">
+                  </div>
+                  <div class="form-group">
+                     <label for="wifi_ssid">WiFi SSID:</label>
+                     <input type="text" id="wifi_ssid" name="wifi_ssid" value="MyWiFi">
+                  </div>
+                  <div class="form-group">
+                     <label for="wifi_password">WiFi Password:</label>
+                     <input type="password" id="wifi_password" name="wifi_password">
+                  </div>
+                  <button type="submit">Save</button>
+               </form>
+            </div>
+         </div>
+         <!-- System Info -->
+         <!-- System Info -->
+         <div id="system-info" class="hidden">
+            <h2>System Info</h2>
+            <div class="container">
+               <div class="info">Device Code Name: <span>NN-IOT-TEMP-HUMI-SENSOR-1A</span></div>
+               <div class="info">Firmware Version: <span>v1.2.0</span></div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
